@@ -7,6 +7,7 @@ public class TestHttpBin {
     @Test
     public void getTest() throws IOException {
         HttpBin objHttpBin = new HttpBin();
-        System.out.print(objHttpBin.requestGet());
+        objHttpBin.requestGet();
+        //objHttpBin.requestPost();
     }
 }

@@ -14,11 +14,10 @@ public class HttpBin {
 
     /**
     * Execute Get request*/
-    public String requestGet() throws IOException {
+    public void requestGet() throws IOException {
         createConnection();
         connection.setRequestMethod("GET");
-        sendRequest();
-        return getResponse();
+        System.out.println(getResponse());
     }
 
     /**
@@ -33,8 +32,11 @@ public class HttpBin {
 
     /**
      * Execute Post request*/
-    public void requestPost() throws ProtocolException {
+    public void requestPost() throws IOException {
+        createConnection();
         connection.setRequestMethod("POST");
+        sendRequest();
+        System.out.println(getResponse());
     }
 
     private void createConnection() throws IOException {
