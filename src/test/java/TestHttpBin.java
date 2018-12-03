@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.StringContains.containsString;
 
 public class TestHttpBin {
@@ -31,7 +32,10 @@ public class TestHttpBin {
 //        expect().statusCode(200).body();
 //        response = expect().statusCode(200).body();
 
-        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.getName()+"\": \""+head.getValue()));
+        //objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.getName()+"\": \""+head.getValue()));
+        System.out.println(response.getBody().asString());
+        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body("headers."+head.getName(), equalTo(head.getValue()));
+
     }
 
     @Test
