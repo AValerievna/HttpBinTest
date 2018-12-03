@@ -10,6 +10,7 @@ import java.util.HashMap;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class TestHttpBin {
+
     private static final int SUCCESS_CODE = 200;
     private static final String HEADERS = "headers.";
     private static final String JSON = "json.";
@@ -18,11 +19,12 @@ public class TestHttpBin {
     private static final String AUTHENTICATED = "authenticated";
     private static final String USER = "user";
     private static final int UNAUTHORIZED = 401;
+    private static final String HTTPBIN_URL = "http://httpbin.org/";
     private HttpBin objHttpBin;
 
     @BeforeTest
     public void setUp() {
-        objHttpBin = new HttpBin();
+        objHttpBin = new HttpBin(HTTPBIN_URL);
     }
 
     @DataProvider(name = "HttpBin_getCustomHeader")
