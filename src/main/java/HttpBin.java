@@ -1,77 +1,44 @@
-import java.io.*;
-import java.net.*;
+import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.json.JSONObject;
+
+import static io.restassured.RestAssured.*;
 
 public class HttpBin {
-    private String url;
-    private HttpURLConnection connection;
-    String urlParameters =
-            "fName=" + URLEncoder.encode("???", "UTF-8") +
-                    "&lName=" + URLEncoder.encode("???", "UTF-8");
 
-    public HttpBin() throws IOException {
-        url = "http://httpbin.org/" ;
+    /**
+     * Execute Get request
+     */
+    public Response requestGet(Header header) {
+        return given().header(header).get("http://httpbin.org/");
+    }
+
+    public Response requestPost() {
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("access-control-allow-credentials", "true");
+        requestBody.put("access-control-allow-origin:", "http://httpbin.org");
+        requestBody.put("connection:  ", "keep-alive");
+        requestBody.put("Password", "some");
+        requestBody.put("Email", "some" + "@gmail.com");
+        RequestSpecification request = RestAssured.given();
+        request.header("Accept", "application/json");
+        request.body(requestBody.toString());
+        return request.post("http://httpbin.org/post");
     }
 
     /**
-    * Execute Get request*/
-    public void requestGet() throws IOException {
-        createConnection();
-        connection.setRequestMethod("GET");
-        System.out.println(getResponse());
-    }
-
-    /**
-     * Execute Stream request*/
+     * Execute Stream request
+     */
     public void requeatStream() {
     }
 
     /**
-     * Execute Basic-Auth request*/
+     * Execute Basic-Auth request
+     */
     public void requeatBasicAuth() {
     }
-
-    /**
-     * Execute Post request*/
-    public void requestPost() throws IOException {
-        createConnection();
-        connection.setRequestMethod("POST");
-        sendRequest();
-        System.out.println(getResponse());
-    }
-
-    private void createConnection() throws IOException {
-        URL obj = new URL(url);
-        connection = (HttpURLConnection) obj.openConnection();
-        connection.setRequestProperty("Content-Type",
-                "application/x-www-form-urlencoded");
-
-        connection.setRequestProperty("Content-Length", "" +
-                Integer.toString(urlParameters.getBytes().length));
-        connection.setRequestProperty("Content-Language", "en-US");
-
-        connection.setUseCaches (false);
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
-    }
-
-    private void sendRequest() throws IOException {
-        DataOutputStream wr = new DataOutputStream (
-                connection.getOutputStream ());
-        wr.writeBytes (urlParameters);
-        wr.flush ();
-        wr.close ();
-    }
-
-    private String getResponse() throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-            response.append('\r');
-        }
-        in.close();
-        return response.toString();
-    }
-
 }
+
