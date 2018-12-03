@@ -23,15 +23,15 @@ public class TestHttpBin {
     public void getTest() {
         HttpBin objHttpBin = new HttpBin();
 
-       Header head =new Header("X-kek","cheburek");
+       Header head =new Header("X-Kek","cheburek");
       response = objHttpBin.requestGet(head);
-        Assert.assertEquals(200, response.getStatusCode(),"Incorrect code");
-        Assert.assertEquals(response.getBody().toString()., head, "Incorrect header");
-        System.out.println(response.getBody().asString());
+ /*       Assert.assertEquals(200, response.getStatusCode(),"Incorrect code");
+        Assert.assertEquals(response.getBody().toString(), head, "Incorrect header");
+        System.out.println(response.getBody().asString());*/
 //        expect().statusCode(200).body();
 //        response = expect().statusCode(200).body();
 
-        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.getName()+": "+head.getValue()));
+        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.getName()+"\": \""+head.getValue()));
     }
 
     @Test
