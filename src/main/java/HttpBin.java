@@ -4,6 +4,9 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.*;
+
 import static io.restassured.RestAssured.*;
 
 public class HttpBin {
@@ -15,19 +18,32 @@ public class HttpBin {
         return given().header(header).get("http://httpbin.org/get");
     }
 
-    public Response requestPost() {
+    public Response requestPost(HashMap<String,String> dataHashMap) {
 
         JSONObject requestBody = new JSONObject();
-        requestBody.put("access-control-allow-credentials", "true");
+
+        for(Map.Entry<String,String> entry : dataHashMap.entrySet()) {
+            requestBody.put(entry.getKey(),entry.getValue());
+        }
+
+/*        requestBody.put("access-control-allow-credentials", "true");
         requestBody.put("access-control-allow-origin:", "http://httpbin.org");
         requestBody.put("connection:  ", "keep-alive");
         requestBody.put("Password", "some");
-        requestBody.put("Email", "some" + "@gmail.com");
-        RequestSpecification request = RestAssured.given();
-        request.header("Accept", "application/json");
-        request.body(requestBody.toString());
-        return request.post("http://httpbin.org/post");
+        requestBody.put("Email", "some" + "@gmail.com");*/
+        //RequestSpecification request = RestAssured.given();
+        //request.header("Accept", "application/json");
+      ;
+        //request.body(dataHashMap);
+
+
+        return   given().body(requestBody.toString()).post("http://httpbin.org/post");
     }
+
+    public Response requestPostWithQueryParams(HashMap<String,String> dataHashMap) {
+        return given().queryParams(dataHashMap).post("http://httpbin.org/post");
+    }
+
 
     /**
      * Execute Stream request
