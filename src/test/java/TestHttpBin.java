@@ -24,14 +24,14 @@ public class TestHttpBin {
         HttpBin objHttpBin = new HttpBin();
 
        Header head =new Header("X-kek","cheburek");
-/*      response = objHttpBin.requestGet(head);
+      response = objHttpBin.requestGet(head);
         Assert.assertEquals(200, response.getStatusCode(),"Incorrect code");
         Assert.assertEquals(response.getBody().toString()., head, "Incorrect header");
         System.out.println(response.getBody().asString());
-        expect().statusCode(200).body();
-        response = expect().statusCode(200).body();*/
+//        expect().statusCode(200).body();
+//        response = expect().statusCode(200).body();
 
-        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.toString()));
+        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.getName()+": "+head.getValue()));
     }
 
     @Test
