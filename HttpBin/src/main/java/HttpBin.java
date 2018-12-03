@@ -12,7 +12,7 @@ public class HttpBin {
      * Execute Get request
      */
     public Response requestGet(Header header) {
-        return given().header(header).get("http://httpbin.org/");
+        return given().header(header).get("http://httpbin.org/get");
     }
 
     public Response requestPost() {

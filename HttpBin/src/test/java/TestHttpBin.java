@@ -7,6 +7,9 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.core.StringContains.containsString;
+
 public class TestHttpBin {
     HttpBin objHttpBin;
     Response response;
@@ -20,11 +23,15 @@ public class TestHttpBin {
     public void getTest() {
         HttpBin objHttpBin = new HttpBin();
 
-       Header head =new Header("kek","cheburek");
-       Response response = objHttpBin.requestGet(head);
+       Header head =new Header("X-kek","cheburek");
+/*      response = objHttpBin.requestGet(head);
         Assert.assertEquals(200, response.getStatusCode(),"Incorrect code");
-        Assert.assertEquals(response.getHeader("kek"), head, "Incorrect header");
+        Assert.assertEquals(response.getBody().toString()., head, "Incorrect header");
         System.out.println(response.getBody().asString());
+        expect().statusCode(200).body();
+        response = expect().statusCode(200).body();*/
+
+        objHttpBin.requestGet(head).then().statusCode(200).and().assertThat().body(containsString(head.toString()));
     }
 
     @Test
