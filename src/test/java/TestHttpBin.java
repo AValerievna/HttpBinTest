@@ -125,7 +125,9 @@ public class TestHttpBin {
     public Object[][] provideHttpBinCheckInvalidAuth() {
         return new Object[][]{
                 {"AllCops", "areBeautiful", "Not", "SoPretty"},
-                {"Make", "America", "Great", "Again"}
+                {"Make", "America", "Great", "Again"},
+                {"MayTheForce", "BeWithYou", "MayTheForce", "BeWithDart"},
+                {"Why", "MrAnderson", "ForWhat", "MrAnderson"}
         };
     }
     @Test(dataProvider = "HttpBin_checkInvalidAuth")
