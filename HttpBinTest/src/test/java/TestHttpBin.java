@@ -59,7 +59,7 @@ public class TestHttpBin {
     }
 
     @Test(dataProvider = "HttpBin_checkPostBody")
-    public void testHttpBinRequestPostWithBody_checkPostBody(HashMap<String,String> data) {
+    public void testHttpBinRequestPostWithBody_checkPostBody(HashMap<String, String> data) {
 
         Response response = objHttpBin.requestPostWithBody(data);
         data.forEach((k, v) -> response.then()
@@ -82,7 +82,7 @@ public class TestHttpBin {
     }
 
     @Test(dataProvider = "HttpBin_checkPostWithQueryParams")
-    public void testHttpBinRequestPostWithQueryParams_checkPostWithQueryParams(HashMap<String,String> queryParams) {
+    public void testHttpBinRequestPostWithQueryParams_checkPostWithQueryParams(HashMap<String, String> queryParams) {
 
         Response response = objHttpBin.requestPostWithQueryParams(queryParams);
         response.then().statusCode(SUCCESS_CODE);
@@ -121,13 +121,17 @@ public class TestHttpBin {
                 .then().statusCode(SUCCESS_CODE)
                 .and().assertThat().body(AUTHENTICATED, equalTo(true), USER, equalTo(validUsr));
     }
+
     @DataProvider(name = "HttpBin_checkInvalidAuth")
     public Object[][] provideHttpBinCheckInvalidAuth() {
         return new Object[][]{
                 {"AllCops", "areBeautiful", "Not", "SoPretty"},
-                {"Make", "America", "Great", "Again"}
+                {"Make", "America", "Great", "Again"},
+                {"MayTheForce", "BeWithYou", "MayTheForce", "BeWithDart"},
+                {"Why", "MrAnderson", "ForWhat", "MrAnderson"}
         };
     }
+
     @Test(dataProvider = "HttpBin_checkInvalidAuth")
     public void basicAuthTestInvalidArgs(String validUsr, String validPswd, String actualUsr, String actualPswd) {
         objHttpBin.requestBasicAuth(validUsr, validPswd, actualUsr, actualPswd)
