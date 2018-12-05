@@ -7,6 +7,11 @@ import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * Class represents work with web-service httpbin.org
+ *
+ * @author Denisova Alexandra
+ */
 class HttpBin {
 
     private String baseUrl;
@@ -18,6 +23,11 @@ class HttpBin {
     private static final String BASIC = "Basic ";
     private static final String BASIC_AUTH = "basic-auth/{validUsr}/{validPswd}";
 
+    /**
+     * Initialize service URL
+     *
+     * @param baseUrl - URL of service
+     */
     HttpBin(String baseUrl) {
         this.baseUrl = baseUrl;
     }
