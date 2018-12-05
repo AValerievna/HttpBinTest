@@ -28,7 +28,7 @@ class HttpBin {
      * Send request to {@link #baseUrl} {@code /get}
      *
      * @param header - header to be sent
-     * @return response from Get request, type Responce
+     * @return response from Get request, type Response
      */
     public Response requestGet(Header header) {
         return given().header(header).get(baseUrl + GET);
@@ -40,7 +40,7 @@ class HttpBin {
      * Send request to {@link #baseUrl} {@code /post}
      *
      * @param dataHashMap - data map to be sent in body
-     * @return response from Post request, type Responce
+     * @return response from Post request, type Response
      */
     public Response requestPostWithBody(HashMap<String, String> dataHashMap) {
         JSONObject requestBody = new JSONObject(dataHashMap);
@@ -53,7 +53,7 @@ class HttpBin {
      * Send request to {@link #baseUrl} {@code /post}
      *
      * @param queryParams - data map to be sent in query params
-     * @return response from Post request, type Responce
+     * @return response from Post request, type Response
      */
     public Response requestPostWithQueryParams(HashMap<String, String> queryParams) {
         return given().queryParams(queryParams).post(baseUrl + POST);
@@ -66,7 +66,7 @@ class HttpBin {
      * Send request to {@link #baseUrl} {@code /stream/:number}
      *
      * @param number - number of lines to generate
-     * @return response from Stream request, type Responce
+     * @return response from Stream request, type Response
      */
     public Response requestStream(int number) {
         return given().get(baseUrl + STREAM, number);
@@ -81,7 +81,7 @@ class HttpBin {
      * @param validPswd  - expected user password
      * @param actualUsr  - actual user name
      * @param actualPswd - actual password
-     * @return response from Basic-Auth request, type Responce
+     * @return response from Basic-Auth request, type Response
      */
     public Response requestBasicAuth(String validUsr, String validPswd, String actualUsr, String actualPswd) {
         String authHeader = encodeBase64((actualUsr + COLON + actualPswd));
