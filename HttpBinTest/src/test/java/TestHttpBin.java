@@ -30,8 +30,8 @@ public class TestHttpBin {
     @DataProvider(name = "HttpBin_getCustomHeader")
     public Object[][] provideHttpBinGetCustomHeader() {
         return new Object[][]{
-                {new Header("X-Kek", "cheburek")},
-                {new Header("X-Man", "Wolverine")}
+                {new Header("X-header", "value68")},
+                {new Header("X-CustomValue", "headerContent")}
         };
     }
 
@@ -47,13 +47,13 @@ public class TestHttpBin {
     public Object[][] provideHttpBinCheckPostBody() {
         return new Object[][]{
                 {new HashMap<String, String>() {{
-                    put("starost", "neradost");
-                    put("molodost", "gadost");
-                    put("marazm", "neskazhu");
+                    put("val1", "content1");
+                    put("val2", "content2");
+                    put("val3", "content3");
                 }}},
                 {new HashMap<String, String>() {{
-                    put("mama", "govorit");
-                    put("chtoYa", "osobenniy");
+                    put("someValue", "valueContent");
+                    put("SomeValue2", "valueContent");
                 }}}
         };
     }
@@ -70,13 +70,13 @@ public class TestHttpBin {
     public Object[][] provideHttpBinCheckPostWithQueryParams() {
         return new Object[][]{
                 {new HashMap<String, String>() {{
-                    put("starost", "neradost");
-                    put("molodost", "gadost");
-                    put("marazm", "neskazhu");
+                    put("val1", "content1");
+                    put("val2", "content2");
+                    put("val3", "content3");
                 }}},
                 {new HashMap<String, String>() {{
-                    put("mama", "govorit");
-                    put("chtoYa", "osobenniy");
+                    put("someValue", "valueContent");
+                    put("SomeValue2", "valueContent");
                 }}}
         };
     }
@@ -110,8 +110,8 @@ public class TestHttpBin {
     @DataProvider(name = "HttpBin_checkValidAuth")
     public Object[][] provideHttpBinCheckValidAuth() {
         return new Object[][]{
-                {"AllCops", "areBeautiful"},
-                {"RestIn", "Pepperoni"}
+                {"user1", "someRoot"},
+                {"useruser", "root"}
         };
     }
 
@@ -125,10 +125,10 @@ public class TestHttpBin {
     @DataProvider(name = "HttpBin_checkInvalidAuth")
     public Object[][] provideHttpBinCheckInvalidAuth() {
         return new Object[][]{
-                {"AllCops", "areBeautiful", "Not", "SoPretty"},
-                {"Make", "America", "Great", "Again"},
-                {"MayTheForce", "BeWithYou", "MayTheForce", "BeWithDart"},
-                {"Why", "MrAnderson", "ForWhat", "MrAnderson"}
+                {"user1", "passw1", "user2", "passw2"},
+                {"someUser", "passw", "someUser2", "passw2"},
+                {"someUser", "passw1", "someUser", "passw2"},
+                {"user1", "userpassw", "user2", "userpassw"}
         };
     }
 
